@@ -2,11 +2,11 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
-import Dashboard from './pages/Dashboard';
+
 import Layouts from './components/Layouts';
 import OpenRoutes from './routing/OpenRoutes';
 import PrivateRoutes from './routing/PrivateRoutes';
-import ChangePassword from './pages/ChangePassword';
+
 
 
 

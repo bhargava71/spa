@@ -7,14 +7,7 @@ const Header = () => {
     <h1 className="text-lg font-semibold mx-auto">QBS</h1>
   
    
-    <div className="flex items-center gap-2">
-      <img 
-        src="/images/logo.png" 
-        alt="Profile" 
-        className="w-10 h-10 rounded-full"
-      />
-      <span className="font-medium">John Doe</span>
-    </div>
+ 
   </div>
   
   );
