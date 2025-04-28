@@ -3,38 +3,30 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import About from './pages/About';
+import Gallery from './pages/Gallery';
+import Services from './pages/Services';
+import Contact from './pages/Contact'; 
 import Layouts from './components/Layouts';
 import Layouts1 from './components/Layouts1';
 import OpenRoutes from './routing/OpenRoutes';
 import PrivateRoutes from './routing/PrivateRoutes';
 
-
-
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-    
-
+        {/* Home Page with Layouts */}
         <Route path="/" element={<Layouts />}>
-
-          {/* <Route path="dashboard" element={<PrivateRoutes><Dashboard /></PrivateRoutes>} />
-          <Route path="change-password" element={<PrivateRoutes><ChangePassword /></PrivateRoutes>} /> */}
-             <Route index element={<OpenRoutes><HomePage /></OpenRoutes>} />
-          {/* <Route path="dashboard" element={<Dashboard />} />
-          <Route path="change-password" element={<ChangePassword />} /> */}
+          <Route index element={<HomePage />} />
         </Route>
 
+        {/* Other Pages with Layouts1 */}
         <Route path="/" element={<Layouts1 />}>
-
-          {/* <Route path="dashboard" element={<PrivateRoutes><Dashboard /></PrivateRoutes>} />
-          <Route path="change-password" element={<PrivateRoutes><ChangePassword /></PrivateRoutes>} /> */}
-             <Route path="/about" element={<OpenRoutes><About /></OpenRoutes>} />
-          {/* <Route path="dashboard" element={<Dashboard />} />
-          <Route path="change-password" element={<ChangePassword />} /> */}
-        </Route>
+  <Route path="/about" element={<OpenRoutes><About /></OpenRoutes>} />
+  <Route path="/services" element={<OpenRoutes><Services /></OpenRoutes>} />
+  <Route path="/gallery" element={<OpenRoutes><Gallery /></OpenRoutes>} />
+  <Route path="/contact" element={<OpenRoutes><Contact /></OpenRoutes>} />
+</Route>
 
       </Routes>
     </BrowserRouter>

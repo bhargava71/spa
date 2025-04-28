@@ -12,12 +12,11 @@ const Layout = () => {
 
             <div className="flex flex-1">
 
-                <div className="mt-[50px] bg-gray-100">
                     <Outlet />
                 </div>
 
 
-            </div>
+            
 
             <Footer />
         </div>

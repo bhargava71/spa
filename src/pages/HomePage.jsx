@@ -1,191 +1,285 @@
-  import { useState, useEffect } from 'react';
-  import { FaFacebookF, FaPinterest, FaLinkedinIn } from "react-icons/fa";
 
-  const HomePage = () => {
-    const [showSocialMedia, setShowSocialMedia] = useState(false);
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import SocialIcons from "../components/socialicons"
 
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 200) {
-          setShowSocialMedia(true);
-        } else {
-          setShowSocialMedia(false);
-        }
-      };
+const HomePage = () => {
+  const [showSocialMedia, setShowSocialMedia] = useState(false)
 
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowSocialMedia(true)
+      } else {
+        setShowSocialMedia(false)
+      }
+    }
 
-    const services = [
-      {
-        title: "Wedding Makeup",
-        description:
-          "Bridal makeup is an essential part of the wedding planning process and designing the perfect look for your wedding day is my number one priority.",
-        image: "/assets/homepage/wedding.svg", // Adding the image as part of the service
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  const services = [
+    {
+      title: "Wedding Makeup",
+      description:
+        "Creating the perfect bridal look is a true art, and making you feel radiant and confident on your wedding day is my top priority.",
+
+      image: "/assets/homepage/wedding.svg",
+    },
+    {
+      title: "Party Makeup",
+      description:
+        "Getting ready for a fancy party isn't just about the dress and hair -- your makeup is one of the key components to achieving your fancy look.",
+      image: "/assets/homepage/drinks.svg",
+    },
+    {
+      title: "Fashion Makeup",
+      description:
+        "Preparing for a glamorous event isn’t complete without flawless makeup — it’s the final touch that brings your entire look together.",
+      image: "/assets/homepage/comb.svg",
+    },
+    {
+      title: "Photo-Shoot",
+      description:
+        "Makeup products like lipstick and powder are used to enhance or transform your look, creating the perfect finish for a stunning photo shoot.",
+      image: "/assets/homepage/photo.svg",
+    },
+  ]
+
+  // Animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  }
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
       },
-      {
-        title: "Party Makeup",
-        description:
-          "Getting ready for a fancy party isn't just about the dress and hair -- your makeup is one of the key components to achieving your fancy look.",
-        image: "/assets/homepage/drinks.svg", // Repeating the same image path as an example
-      },
-      {
-        title: "Fashion Makeup",
-        description:
-          "Makeup for fashion settings is usually designed to be high impact, and is meant to show the model and the design being modeled to the best effect.",
-        image: "/assets/homepage/comb.svg", // Repeating the same image path as an example
-      },
-      {
-        title: "Photo-Shoot",
-        description:
-          "Cosmetics such as lipstick or powder applied to the face, used to enhance or alter the appearance for best photo shoot.",
-        image: "/assets/homepage/photo.svg", // Repeating the same image path as an example
-      },
-    ];
+    },
+  }
 
-    return (
-      <div>
-        {/* Main Content Section */}
-        <div className="bg-white min-h-screen flex flex-col ">
-          {/* Floating Social Media Icons */}
-          {showSocialMedia && (
-            <div className="fixed left-4 top-1/2 transform -translate-y-1/2 flex flex-col space-y-3 z-50">
-              <a href="#" className="bg-gray-900 p-3 rounded-full text-white hover:bg-purple-600">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="bg-gray-900 p-3 rounded-full text-white hover:bg-purple-600">
-                <FaPinterest />
-              </a>
-              <a href="#" className="bg-gray-900 p-3 rounded-full text-white hover:bg-purple-600">
-                <FaLinkedinIn />
-              </a>
-            </div>
-          )}
+ 
 
-          {/* Main Content Layout */}
-          <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto px-6 py-12 mt-20 ml-24">
-            {/* Image Layout */}
-            <div className="relative flex gap-2 mb-6 md:mb-0">
-  <img
-    src="/assets/homepage/w1.jpg"
-    alt="Bridal Look"
-    className="w-32 h-96 object-cover relative -top-8 border-4 border-transparent hover:border-[#933EA] transition-all"
-  />
-  <img
-    src="/assets/homepage/w2.jpg"
-    alt="Bridal Jewelry"
-    className="w-32 h-96 object-cover relative top-8 border-4 border-transparent hover:border-[#933EA] transition-all"
-  />
-  <img
-    src="/assets/homepage/w3.jpeg"
-    alt="Bridal Look"
-    className="w-32 h-96 object-cover relative -top-8 border-4 border-transparent hover:border-[#933EA] transition-all"
-  />
-  <img
-    src="/assets/homepage/w4.jpg"
-    alt="Bridal Jewelry"
-    className="w-32 h-96 object-cover relative top-8 border-4 border-transparent hover:border-[#933EA] transition-all"
-  />
-</div>
+  return (
+    <div className="overflow-x-hidden ">
+<SocialIcons />
 
-
-
+      {/* Hero Section */}
+      <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="flex flex-col lg:flex-row items-center justify-between gap-12"
+          >
+            {/* Image Gallery */}
+            <motion.div
+              className="relative flex gap-3 w-full lg:w-1/2 justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              {[
+                "/assets/homepage/w1.jpg",
+                "/assets/homepage/w2.jpg",
+                "/assets/homepage/w3.jpeg",
+                "/assets/homepage/w4.jpg",
+              ].map((src, index) => (
+                <motion.div
+                  key={index}
+                  className={`relative ${index % 2 === 0 ? "mt-12" : "mb-12"}`}
+                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                >
+                  <img
+                    src={src || "/placeholder.svg"}
+                    alt={`Beauty look ${index + 1}`}
+                    className="w-16 sm:w-24 md:w-32 h-64 sm:h-80 md:h-96 object-cover rounded-lg shadow-lg border-2 border-transparent hover:border-purple-600 transition-all"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
 
             {/* Text Content */}
-            <div className="text-center md:text-left md:ml-12 max-w-md">
-              <p className="text-purple-600 font-semibold">Welcome To</p>
-              <h1 className="text-3xl font-bold text-purple-700">QBS Salon</h1>
-              <p className="mt-4 text-gray-700">
-                Our beauty experts are armed with ultramodern equipment, world-class products, and unmatched skill,
-                setting our beauty services apart from the rest.
-              </p>
-              <button className="mt-6 px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700">
+            <motion.div className="text-center lg:text-left lg:w-1/2 max-w-lg" variants={fadeIn}>
+              <motion.p
+                className="text-purple-600 font-semibold"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                Welcome To
+              </motion.p>
+              <motion.h1
+                className="text-4xl sm:text-5xl font-bold text-purple-700 mt-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                BK SPA
+              </motion.h1>
+              <motion.p
+                className="mt-6 text-gray-700 text-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                Our beauty professionals combine advanced technology, premium products, and exceptional expertise to deliver beauty services that truly stand out.
+              </motion.p>
+              <motion.button
+                className="mt-8 px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
                 KNOW MORE
-              </button>
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-purple-600">Perfect Services for Every Occasion</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">
+            Reveal your best self with personalized beauty and wellness services designed just for you.</p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn}
+                whileHover={{
+                  y: -10,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                }}
+                className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 border border-gray-100"
+              >
+                <div className="p-6">
+                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center bg-purple-50 rounded-full">
+                    <img
+                      src={service.image || "/placeholder.svg"}
+                      alt={service.title}
+                      className="w-12 h-12 text-purple-600"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-purple-700 mb-3">{service.title}</h3>
+                  <p className="text-gray-600">{service.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Franchise Section */}
+      <motion.section
+        className="relative py-24 bg-fixed bg-cover bg-center"
+        style={{ backgroundImage: `url('/assets/background.webp')` }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="text-white max-w-xl">
+              <motion.h2
+                className="text-3xl sm:text-4xl font-bold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                Best Service
+              </motion.h2>
+              <motion.p
+                className="text-lg opacity-90"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.9 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Experience the finest in beauty and wellness with our expertly crafted services, designed to deliver exceptional results and an unforgettable experience for every client.
+              </motion.p>
             </div>
+            <motion.button
+              className="mt-6 md:mt-0 border-2 border-white px-8 py-3 rounded-lg text-white font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              CONTACT US
+            </motion.button>
           </div>
         </div>
+      </motion.section>
 
-        {/* Services Section */}
-        <div className="bg-gray-100 py-12 ml-[100px]">
-    <div className="max-w-4xl mx-auto text-center">
-      <h2 className="text-3xl font-semibold text-purple-600">
-        Services For Every Occasion
-      </h2>
-      <p className="text-gray-600 mt-2">
-        Look and feel your best. Experience the finest beauty and wellness services.
-      </p>
-    </div>
-
-    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
-      {services.map((service, index) => (
-        <div
-          key={index}
-          className="bg-white shadow-md p-6 rounded-lg text-center border border-gray-200"
-        >
-          {/* Displaying the SVG icon and applying the color */}
-          <div className="w-20 h-20 mx-auto mb-3 flex items-center justify-center">
-            <img
-              src={service.image}
-              alt={service.title}
-              className="w-16 h-16 object-cover fill-[#933EA]"
-            />
-          </div>
-          <h3 className="text-xl font-semibold text-purple-700">
-            {service.title}
-          </h3>
-          <p className="text-gray-600 mt-2">{service.description}</p>
+      {/* Footer Banner */}
+      <motion.section
+        className="bg-white py-16 px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            className="bg-gradient-to-r from-purple-50 to-purple-100 shadow-xl rounded-2xl p-10 text-center"
+            whileHover={{ boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+          >
+            <motion.h2
+              className="text-3xl sm:text-4xl font-bold text-purple-700 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              BK SPA
+            </motion.h2>
+            <motion.p
+              className="text-purple-600 text-lg max-w-xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              Join the BK family and embark on a path to excellence. Redefine beauty and unlock unparalleled success.
+            </motion.p>
+          </motion.div>
         </div>
-      ))}
+      </motion.section>
     </div>
-  </div>
+  )
+}
 
-  <div
-  className="relative bg-cover bg-center h-[300px] flex items-center justify-center mr-[-96px]"
-  style={{
-    backgroundImage: `url('/assets/background.webp')`, // Replace with your actual image path
-    backgroundSize: 'cover', // Ensure the image covers the area
-    backgroundPosition: 'center', // Keep the image centered
-    backgroundRepeat: 'no-repeat', // Prevent image repetition
-    backgroundAttachment: 'fixed', // Optional: Fix the image during scroll for parallax effect
-  }}
->
-  <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay */}
-
-  <div className="relative text-white px-6 flex justify-between items-center">
-    <div className="max-w-lg">
-      <h2 className="text-3xl font-bold">Own A Franchise</h2>
-      <p className="mt-2">
-        Leverage the future growth potential of the burgeoning beauty + wellness sector and
-        realize your dream of entrepreneurial success.
-      </p>
-    </div>
-    <button className="mt-4 border border-white px-6 py-2 rounded-md hover:bg-white hover:text-black transition">
-      CONTACT US
-    </button>
-  </div>
-</div>
-
-
-<div className="bg-white">
-      {/* Header Section */}
-      <div className="flex justify-center items-center py-12">
-        <div className="bg-white shadow-lg p-8 rounded-lg text-center max-w-2xl">
-          <h2 className="text-3xl font-bold text-purple-600">QBS Salon</h2>
-          <p className="text-purple-500 mt-2">
-            Come join the QBS family and begin your journey to the heights of
-            business success.
-          </p>
-        </div>
-      </div>
-      </div>
-
-
-      </div>
-    );
-  };
-
-  export default HomePage;
+export default HomePage

@@ -1,5 +1,6 @@
 import React from 'react';
-import Header1 from '../components/Header1'; // Ensure this path is correct
+import SocialIcons from '../components/socialicons';
+import { motion } from "framer-motion";
 
 const services = [
   { name: "Nail Art", image: "/assets/services/nail.png" },
@@ -12,91 +13,106 @@ const services = [
 
 const Services = () => {
   return (
-    <div className="min-h-screen bg-white mt-[-73px]">
-
-      {/* Main Section */}
-      <div className="flex flex-col items-center p-6 bg-white">
-        <h2 className="text-3xl font-semibold text-purple-700 text-center mb-4 ml-[100px]">  {/* Decreased the left margin */}
+    <div className="min-h-screen bg-white mt-0 md:">
+      {/* Header */}
+      <div className="flex flex-col items-center p-4 md:p-6 bg-white mx-2 md:ml-[124px]">
+        <h2 className="text-2xl md:text-3xl font-semibold text-purple-700 text-center mb-3 md:mb-4 ">
           Choose From Collection
         </h2>
-        <p className="text-gray-600 text-center mb-8 mx-auto ml-[105px]"> {/* Decreased the left margin */}
+        <p className="text-gray-800 text-center mb-6 md:mb-8 max-w-2xl text-sm md:text-base">
           When time is of the essence and you want your hair looking and feeling revitalized and healthy, our instant treatments will give that added boost.
         </p>
 
-        {/* Centered grid of services */}
+        {/* Services Grid - Always 2 columns on mobile, 3 columns on large screens */}
         <div className="flex justify-center items-center w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {services.map((service, index) => (
-              <div key={index} className="flex flex-col items-center bg-white shadow-lg rounded-2xl p-6 w-64 transition-transform transform hover:scale-105">
-                <img src={service.image} alt={service.name} className="w-20 h-20 object-cover rounded-full" />
-                <h3 className="text-purple-700 text-lg font-medium mt-4">{service.name}</h3>
+              <div key={index} className="flex flex-col items-center bg-white shadow-lg rounded-2xl p-3 md:p-6 w-full max-w-[150px] sm:max-w-[180px] md:w-64 transition-transform transform hover:scale-105">
+                {/* Applied better filter combination for purple color */}
+                <div className="flex items-center justify-center">
+                  <img
+                    src={service.image}
+                    alt={service.name}
+                    className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-cover rounded-full"
+                    style={{ 
+                      filter: "invert(27%) sepia(51%) saturate(2878%) hue-rotate(270deg) brightness(104%) contrast(97%)"
+                    }}
+                  />
+                </div>
+                <h3 className="text-purple-700 text-sm sm:text-base md:text-lg font-medium mt-2 md:mt-4 text-center">{service.name}</h3>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <SocialIcons />
 
-      {/* Background Image Section */}
-      <div className="relative  h-40 md:h-52 lg:h-64 flex justify-center items-center bg-cover bg-center w-[109%] h-[184px] mt-[45px] mb-[100px] w-[1349px]" 
-        style={{ backgroundImage: "url('/assets/background.webp')" }}>
+      {/* Background Section */}
+      <motion.section
+        className="relative py-16 md:py-24 bg-fixed bg-cover bg-center w-full md:w-[118%] mx-auto md:mr-[-15%]"
+        style={{
+          backgroundImage: `url('/assets/background.webp')`,
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="absolute inset-0 bg-black opacity-60"></div>
 
-        {/* Discount Badge */}
-        <img 
-          src="/assets/services/sale-badge.png" 
-          alt="25% OFF" 
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 ml-[174px]"
-        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+          {/* Discount Badge */}
+          <img
+            src="/assets/services/sale-badge.png"
+            alt="25% OFF"
+            className="w-14 h-14 md:w-20 md:h-20 absolute left-4 md:left-6 top-[-20px] md:top-1/2 md:transform md:-translate-y-1/2"
+          />
 
-        {/* Text Content */}
-        <div className="text-center text-white">
-          <h2 className="text-lg md:text-2xl font-semibold">Book Your Appointment Now</h2>
-          <p className="text-sm md:text-lg">Awesome Monsoon Sale</p>
+          {/* Text + Button */}
+          <div className="text-center text-white flex-1 mt-8 md:mt-0">
+            <h2 className="text-xl md:text-2xl font-semibold">Book Your Appointment Now</h2>
+            <p className="text-sm md:text-lg">Awesome Monsoon Sale</p>
+          </div>
+
+          <button className="border border-white text-white px-4 py-2 rounded-md hover:bg-white hover:text-purple-700 transition mt-4 md:mt-0 md:ml-8">
+            BOOK AN APPOINTMENT
+          </button>
         </div>
+      </motion.section>
 
-        {/* Appointment Button */}
-        <button className="absolute right-6 top-1/2 transform -translate-y-1/2 border border-white text-white px-4 py-2 rounded-md hover:bg-white hover:text-purple-700 transition mr-[140px]">
-          BOOK AN APPOINTMENT
-        </button>
-      </div>
-
-      {/* Image + Text Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center bg-white mb-[50px]">
-
-        {/* Left Image */}
+      {/* Bridal Makeup Section */}
+      <div className="flex flex-col md:flex-row items-center justify-center bg-white my-8 md:my-12 px-4">
+        {/* Image */}
         <div className="w-full md:w-1/2 flex justify-center">
-          <img 
-            src="/assets/services/s2.jpg" 
-            alt="Bridal Makeup" 
-            className="rounded-2xl shadow-lg w-full md:w-[273px]"
+          <img
+            src="/assets/services/s2.jpg"
+            alt="Bridal Makeup"
+            className="rounded-2xl shadow-lg w-full max-w-[250px] md:max-w-[273px]"
           />
         </div>
 
-        {/* Right Text Section */}
-        <div className="w-full md:w-1/2 md:pl-10 text-left mt-6 md:mt-0">
-        <h2 className="text-2xl md:text-3xl font-semibold text-purple-700 ml-[-90px]">  {/* Added negative margin to shift left */}
-  The Best Bridal Makeup
-</h2>
-<p className="text-gray-600 mt-2 ml-[-90px]">
-  Personal & distinct looks created through intensive make-up trial sessions with experts. 
-  Unique skin and hair care.
-</p>
+        {/* Text */}
+        <div className="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0 text-center md:text-left">
+          <h2 className="text-xl md:text-3xl font-semibold text-purple-700 md:ml-[-90px]">
+            The Best Bridal Makeup
+          </h2>
+          <p className="text-gray-800 mt-2 text-sm md:text-base">
+            Personal & distinct looks created through intensive make-up trial sessions with experts. Unique skin and hair care.
+          </p>
 
-          {/* List of Wedding Events with Proper Spacing */}
-          <div className="mt-6">
-            <p className="text-lg font-medium text-purple-700 cursor-pointer mb-[50px]">
+          <div className="mt-6 space-y-4 md:space-y-6 flex flex-col items-center md:items-start">
+            <p className="text-base md:text-lg font-medium text-purple-700 cursor-pointer">
               Pre-Wedding Photo Shoot
             </p>
-            <p className="text-lg font-medium text-purple-700 cursor-pointer mt-[50px] ml-[-83px]">
+            <p className="text-base md:text-lg font-medium text-purple-700 cursor-pointer md:ml-[-83px]">
               The Engagement Day
             </p>
-            <p className="text-lg font-medium text-purple-700 cursor-pointer mt-[50px]">
+            <p className="text-base md:text-lg font-medium text-purple-700 cursor-pointer md:mt-[50px]">
               The Grand Wedding Day
             </p>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 };
